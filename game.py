@@ -5,8 +5,8 @@ import random
 pygame.init()
 
 # Screen dimensions
-screen_width = 1800
-screen_height = 1080
+screen_width = 1300
+screen_height = 800
 
 # Colors
 white = (255, 255, 255)
@@ -43,13 +43,16 @@ while not game_over:
         if event.type == pygame.QUIT:
             game_over = True
 
+        # Handle bullet launch on key press
+        if event.type == pygame.KEYDOWN:  # Detect key press
+            if event.key == pygame.K_SPACE:  # Check if spacebar is pressed
+                bullets.append([player_pos[0] + player_size // 2, player_pos[1]])
+
     keys = pygame.key.get_pressed()
     if keys[pygame.K_LEFT] and player_pos[0] > 0:
         player_pos[0] -= player_speed
     if keys[pygame.K_RIGHT] and player_pos[0] < screen_width - player_size:
         player_pos[0] += player_speed
-    if keys[pygame.K_SPACE]:
-        bullets.append([player_pos[0] + player_size // 2, player_pos[1]])
 
     screen.fill(black)
 
